@@ -1,8 +1,8 @@
 import { body, validationResult } from 'express-validator'
 import path from 'path'
 import grpc from 'grpc'
-const protoLoader = require("@grpc/proto-loader")
 import config from '../../config/service'
+const protoLoader = require("@grpc/proto-loader")
 
 const PROTO_PATH = path.join(__dirname, '../../proto/project.proto')
 
@@ -53,7 +53,110 @@ exports.list = async (req, res, next) => {
     try {
         const result = await projectList()
         res.status(200).json(result)
-    } catch(err) {
-        res.json(err)
+    } catch(e) {
+        res.json(e)
+    }
+}
+
+const projectCreate = (options) => {
+    return new Promise((resolve, reject) => {
+      client.Create(options, (error, response) => {
+            if (error) { reject(error) }
+            resolve(response)
+        })
+    })
+}
+
+exports.create = async (req, res, next) => {
+    try {
+        const result = await projectCreate({
+            'name': req.body.name,
+            'desc': req.body.desc
+        })
+        res.status(201).json(result)
+    } catch(e){
+        switch(e?.details){
+            case 'ALREADY_EXISTS':
+                res.status(409).json({
+                    error: e.metadata.getMap()
+                })
+                break
+            default:
+                res.status(500).json(e)
+        }
+    }
+}
+
+const projectRead = (options) => {
+    return new Promise((resolve, reject) => {
+      client.Read(options, (error, response) => {
+            if (error) { reject(error) }
+            resolve(response)
+        })
+    })
+}
+
+exports.read = async (req, res, next) => {
+    try {
+        const result = await projectRead({
+            'id': req.params.id
+        })
+        res.status(200).json(result)
+    } catch(e) {
+        if(e.details === 'Not found') {
+            res.status(204).json(e)
+        } else {
+            res.status(500).json(e)
+        }
+    }
+}
+
+const projectUpdate = (options) => {
+    return new Promise((resolve, reject) => {
+      client.Update(options, (error, response) => {
+            if (error) { reject(error) }
+            resolve(response)
+        })
+    })
+}
+
+exports.update = async (req, res, next) => {
+    try {
+        const result = await projectUpdate({
+            'id': req.params.id,
+            'name': req.body.name,
+            'desc': req.body.desc
+        })
+        res.status(200).json({id: req.params.id})
+    } catch(e) {
+        if(e.details === 'Not found') {
+            res.status(204).json(e)
+        } else {
+            res.status(500).json(e)
+        }
+    }
+}
+
+const projectDelete = (options) => {
+    return new Promise((resolve, reject) => {
+      client.Delete(options, (error, response) => {
+            if (error) { reject(error) }
+            resolve(response)
+        })
+    })
+}
+
+exports.delete = async (req, res, next) => {
+    try {
+        const result = await projectDelete({
+            'id': req.params.id
+        })
+        res.status(200).json({id: req.params.id})
+    } catch(e) {
+        if(e.details === 'Not found'){
+            res.status(204).json(e)
+        } else {
+            res.status(500).json(e)
+        }
     }
 }
