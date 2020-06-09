@@ -10,4 +10,5 @@ const router = express()
 router.use('/student', student)
 
 router.use('/project', project)
+
 export default router

@@ -1,7 +1,7 @@
 import { body, validationResult } from 'express-validator'
 import path from 'path'
 import grpc from 'grpc'
-import protoLoader from '@grpc/proto-loader'
+const protoLoader = require("@grpc/proto-loader")
 import config from '../../config/service'
 
 const PROTO_PATH = path.join(__dirname, '../../proto/project.proto')
@@ -37,9 +37,8 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
     oneofs: true
 })
 
-// Load in our service definition
-const projectProto = grpc.loadPackageDefinition(packageDefinition).proto
-const client = new projectProto.ProjectService(`${config.project.host}:${config.project.port}`, grpc.credentials.createInsecure())
+const projectProto = grpc.loadPackageDefinition(packageDefinition).project
+const client = new projectProto.ProjectService(config.project.host +':'+ config.project.port, grpc.credentials.createInsecure())
 
 const projectList = (options) => {
     return new Promise((resolve, reject) => {
