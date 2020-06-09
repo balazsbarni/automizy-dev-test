@@ -52,7 +52,15 @@ const projectList = (options) => {
 exports.list = async (req, res, next) => {
     try {
         const result = await projectList()
-        res.status(200).json(result)
+        const formatted = result.projects.map(project => ({
+            id: project.id,
+            name: project.name,
+            desc: project.description,
+            updatedAt: project.updatedAt,
+            createdAt: project.createdAt
+        })
+    )
+        res.status(200).json({projects: formatted})
     } catch(e) {
         res.json(e)
     }
@@ -71,9 +79,15 @@ exports.create = async (req, res, next) => {
     try {
         const result = await projectCreate({
             'name': req.body.name,
-            'desc': req.body.desc
+            'description': req.body.desc
         })
-        res.status(201).json(result)
+        res.status(201).json({
+            id: result.id,
+            name: result.name,
+            desc: result.description,
+            updatedAt: result.updatedAt,
+            createdAt: result.createdAt
+        })
     } catch(e){
         switch(e?.details){
             case 'ALREADY_EXISTS':
@@ -125,7 +139,7 @@ exports.update = async (req, res, next) => {
         const result = await projectUpdate({
             'id': req.params.id,
             'name': req.body.name,
-            'desc': req.body.desc
+            'description': req.body.desc
         })
         res.status(200).json({id: req.params.id})
     } catch(e) {

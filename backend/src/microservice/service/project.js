@@ -32,6 +32,7 @@ const List = async (call, callback) => {
 
 const Create = async (call, callback) => {
     const project = call.request
+
     try {
         const result = await projectModel.create(project)
         callback(null, result)
@@ -78,7 +79,7 @@ const Update = async (call, callback) => {
         const affectedRows = await projectModel.update(
             {
                 'name': project.name, 
-                'desc': project.desc
+                'description': project.description
             },
             {
                 where: { id: project.id }
