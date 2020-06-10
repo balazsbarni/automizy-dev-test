@@ -1,0 +1,63 @@
+syntax = "proto3";
+package management;
+
+service ManagementService {
+   rpc List (Empty) returns (ManagementList) {}
+   rpc Create (Management) returns (Management) {}
+   rpc Read (ManagementRequestId) returns (Management) {}
+   rpc Update (Management) returns (Empty) {}
+   rpc Delete (ManagementRequestId) returns (Empty) {}
+   rpc ListByProject (ProjectRequestId) returns (StudentList) {}
+   rpc ListByStudent (StudentRequestId) returns (ProjectList) {}
+}
+
+message Empty {}
+
+message Management {
+   string id = 1;
+   string student_id = 2;
+   string project_id = 3;
+   string createdAt = 4;
+   string updatedAt = 5;
+}
+
+message ManagementList {
+   repeated Management managements = 1;
+}
+
+message ManagementRequestId {
+   string id = 1;
+}
+
+message Project {
+   string id = 1;
+   string name = 2;
+   string description = 3;
+   string createdAt = 4;
+   string updatedAt = 5;
+}
+
+message ProjectList {
+   repeated Project projects = 1;
+}
+
+message ProjectRequestId {
+   string id = 1;
+}
+
+message Student {
+   string id = 1;
+   string first_name = 2;
+   string last_name = 3;
+   string email = 4;
+   string createdAt = 5;
+   string updatedAt = 6;
+}
+
+message StudentList {
+   repeated Student students = 1;
+}
+
+message StudentRequestId {
+   string id = 1;
+}
