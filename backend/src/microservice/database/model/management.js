@@ -11,6 +11,7 @@ const ManagementModel = ({
     },
     student_id: {
       type: INTEGER,
+      allowNull: false,
       references: {
         model: 'students',
         key: 'id'
@@ -18,6 +19,7 @@ const ManagementModel = ({
     },
     project_id: {
       type: INTEGER,
+      allowNull: false,
       references: {
         model: 'projects',
         key: 'id'
