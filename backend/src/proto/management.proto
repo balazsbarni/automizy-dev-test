@@ -5,7 +5,6 @@ service ManagementService {
    rpc List (Empty) returns (ManagementList) {}
    rpc Create (Management) returns (Management) {}
    rpc Read (ManagementRequestId) returns (Management) {}
-   rpc Update (Management) returns (Empty) {}
    rpc Delete (ManagementRequestId) returns (Empty) {}
    rpc ListByProject (ProjectRequestId) returns (StudentList) {}
    rpc ListByStudent (StudentRequestId) returns (ProjectList) {}
