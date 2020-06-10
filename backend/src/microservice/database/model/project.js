@@ -3,7 +3,7 @@ const ProjectModel = ({
     DataType
   }) => {
   const {INTEGER, STRING, TEXT, DATE, NOW} = DataType
-  const Project = sequelize.define("project", {
+  const Project = sequelize.define('project', {
     id: {
       type: INTEGER, 
       primaryKey: true, 

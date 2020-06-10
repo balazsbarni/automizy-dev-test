@@ -3,7 +3,7 @@ const StudentModel = ({
     DataType
   }) => {
   const {INTEGER, STRING, DATE, NOW} = DataType
-  const Student = sequelize.define("student", {
+  const Student = sequelize.define('student', {
     id: {
       type: INTEGER, 
       primaryKey: true, 

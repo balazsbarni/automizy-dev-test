@@ -31,4 +31,4 @@ const ManagementModel = ({
   return Management;
 }
 
-export default ProjectModel
+export default ManagementModel
