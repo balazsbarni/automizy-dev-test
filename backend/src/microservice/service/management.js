@@ -22,7 +22,8 @@ const managementModel = ManagementModel(db)
 const projectModel = ProjectModel(db)
 const studentModel = StudentModel(db)
 
-managementModel.hasOne(studentModel,{constraints: false, foreignKey: 'id',sourceKey: 'student_id'})
+managementModel.hasOne(studentModel, { constraints: false, foreignKey: 'id', sourceKey: 'student_id'})
+managementModel.hasOne(projectModel, { constraints: false, foreignKey: 'id', sourceKey: 'project_id'})
 
 const List = async (call, callback) => {
     try {
@@ -42,7 +43,6 @@ const Create = async (call, callback) => {
         const result = await managementModel.create(management)
         callback(null, result)
     } catch(err) {
-        console.log(err)
         callback({
             code: grpc.status.ABORTED,
             details: 'ABORTED'
@@ -92,7 +92,6 @@ const Delete = async (call, callback) => {
 
 const ListByProject = async (call, callback) => {
     const id = call.request.id
-    console.log(id)
     try {
         const result = await managementModel.findAll({
             include: [{
@@ -119,19 +118,16 @@ const ListByProject = async (call, callback) => {
 
 const ListByStudent = async (call, callback) => {
     const id = call.request.id
-    console.log(id)
     try {
-        const result = await managementModel.findAll(
-        //     {
-        //     include: [{
-        //       model: projectModel,
-        //       where: { student_id: id }
-        //      }]
-        //   }
-          )
-        
+        const result = await managementModel.findAll({
+            include: [{
+              model: projectModel,
+            }],
+            where: { student_id: id }
+          })
+        const projects = result.map(e => e.project)
         if(result) {
-            callback(null, result)
+            callback(null, { projects })
         } else {
             callback({
                 code: grpc.status.NOT_FOUND,
