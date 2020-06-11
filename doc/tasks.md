@@ -21,4 +21,13 @@
 * Postman json exportalasa 
 
 ### Frontend
-...
+1. Project screen
+* Projektek listazasa
+* Projekt hozzaadas
+* Projekt torles
+2. Management screen
+* Management listazas projekt alapjan
+* Management listazas student alapjan
+* Management hozzadas
+* Student torlese projetrol
+* Projekt torlese studentrol
