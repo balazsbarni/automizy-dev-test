@@ -12,6 +12,7 @@ const ManagementModel = ({
     student_id: {
       type: INTEGER,
       allowNull: false,
+      onDelete: 'CASCADE',
       references: {
         model: 'students',
         key: 'id'
@@ -20,6 +21,7 @@ const ManagementModel = ({
     project_id: {
       type: INTEGER,
       allowNull: false,
+      onDelete: 'CASCADE',
       references: {
         model: 'projects',
         key: 'id'
