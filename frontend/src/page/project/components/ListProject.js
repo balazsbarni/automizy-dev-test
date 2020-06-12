@@ -11,6 +11,8 @@ import {
     Modal, 
     message } from 'antd'
 const { confirm } = Modal
+import { Collapse } from 'antd';
+const { Panel } = Collapse;
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import "../../../layout/Layout.css"
 
@@ -90,25 +92,14 @@ const ListProject = ({ reloadListTrigger }) => {
                     {(list.complete && (
                         list.data &&
                             list.data.projects.length ?
-                            <List
-                                bordered
-                                dataSource={list.data.projects}
-                                renderItem={item => (
-                                    <List.Item>
-                                        <Typography.Text strong>
-                                            {item.name}
-                                        </Typography.Text>
-                                        <Typography.Text>
-                                            {item.desc}
-                                        </Typography.Text>
-                                        <Button
-                                            type="primary"
-                                            onClick={() => onClickDeleteProject(item)}>
-                                            Delete
-                                        </Button>
-                                    </List.Item>
-                                )}
-                            />
+                            <Collapse accordion>
+                            { list.data.projects.map(project => 
+                                 <Panel header={project.name} key={project.id}>
+                                    <p>{project.desc}</p>
+                                    <Button type="primary" onClick={() => onClickDeleteProject(project)}>Delete</Button>
+                                </Panel>
+                            )}
+                            </Collapse>
                             :
                             <Empty />
                     ))}

@@ -19,7 +19,8 @@ const AddProjectForm = ({form}) => {
                 name="desc"
                 rules={[{ required: false, message: 'Please type the projects description!' }]}
             >
-                <Input
+                <Input.TextArea
+                    autoSize={{ minRows: 4, maxRows: 10 }}
                     autoComplete='off'
                     placeholder="Description"
                 />
