@@ -14,7 +14,7 @@ const ProjectHeader = ({ onClickAddNewProject }) => {
     return (
         <Header className="header">
             <Row>
-                <Col span={22}>
+                <Col span={20}>
                     <Title>Project Handler</Title>
                 </Col>
                 <Col span={2}>
@@ -26,7 +26,7 @@ const ProjectHeader = ({ onClickAddNewProject }) => {
                 </Col>
             </Row>
         </Header>
-    )
+        )
 }
 
 export default ProjectHeader

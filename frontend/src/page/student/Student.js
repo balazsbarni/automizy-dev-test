@@ -38,7 +38,7 @@ const Student=()=>{
         <Layout>
             <Header className="header">
                 <Row>
-                    <Col span={22}>
+                    <Col span={20}>
                         <Title>Student Handler</Title>
                     </Col>
                     <Col span={2}>
