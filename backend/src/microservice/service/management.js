@@ -99,7 +99,17 @@ const ListByProject = async (call, callback) => {
             }],
             where: { project_id: id }
           })
-        const students = result.map(e => e.student)
+        const students = result.map(e => {
+            const studentData = {}
+            studentData.id = e.dataValues.student.id
+            studentData.first_name = e.student.dataValues.first_name
+            studentData.last_name = e.student.dataValues.last_name
+            studentData.email = e.student.dataValues.email
+            studentData.createdAt = e.student.dataValues.createdAt
+            studentData.updatedAt = e.student.dataValues.updatedAt
+            studentData.managementId = e.dataValues.id
+            return studentData
+        })
         if(result) {
             callback(null, { students })
         } else {
