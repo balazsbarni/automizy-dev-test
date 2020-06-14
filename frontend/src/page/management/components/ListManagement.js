@@ -82,26 +82,25 @@ const ListManagement = ({ reloadListTrigger, projects, students, setProjects, se
         [trigger, reloadListTrigger]
     )
 
-    const onClickDeleteManagement = ({ name, id }) => {
+    const onClickDeleteManagement = (id) => {
         confirm({
-            title: 'Are you sure delete this project?',
+            title: 'Are you sure delete this m?',
             icon: <ExclamationCircleOutlined />,
-            content: name,
             okText: 'Yes',
             okType: 'danger',
             cancelText: 'No',
             onOk() {
-                deleteProject({ name, id })
+                deleteManagement(id)
             },
             onCancel() { }
         })
     }
 
-    const deleteManagement = ({ id, name }) => {
+    const deleteManagement = (id) => {
         setLoader(true)
-        axios.delete('api/project/' + id)
+        axios.delete('api/management/' + id)
             .then(res => {
-                message.success('The following project has been deleted: ' + name)
+                message.success('Deleted'+ id)
                 setLoader(false)
                 setTrigger(new Date().getTime())
             }
@@ -112,8 +111,19 @@ const ListManagement = ({ reloadListTrigger, projects, students, setProjects, se
     }
 
     const filterStudentsByProject = (pId) => {
-        const managementIdsByProject = list.data.managements.filter(m => m.project_id === pId).map(m => m.student_id)
-        return students.filter(s => managementIdsByProject.indexOf(s.id) !== -1)
+        const managementIdsByProject = list.data.managements.filter(m => m.project_id === pId)
+        return managementIdsByProject.map(m => ({
+            mId: m.id,
+            student: students.filter(s => s.id === m.student_id)[0]
+        }))
+    }
+
+    const filterProjectsByStudent = (sId) => {
+        const managementIdsByStudent = list.data.managements.filter(m => m.student_id === sId)
+        return managementIdsByStudent.map(m => ({
+            mId: m.id,
+            project: projects.filter(p => p.id === m.project_id)[0]
+        }))
     }
 
     return (
@@ -124,8 +134,24 @@ const ListManagement = ({ reloadListTrigger, projects, students, setProjects, se
                             <Collapse accordion>
                                 {projects.filter(project => filterStudentsByProject(project.id).length > 0).map(project => 
                                     <Panel header={project.name} key={project.id}>
-                                        {(filterStudentsByProject(project.id)).map(student =>
-                                            <Tag key={student.id}>{student.first_name + ' ' + student.last_name}</Tag>
+                                        {(filterStudentsByProject(project.id)).map(elem =>
+                                            <Tag closable onClose={(e) => {e.preventDefault(); onClickDeleteManagement(elem.mId)}} key={elem.student.id} >{elem.student.first_name + ' ' + elem.student.last_name}</Tag>
+                                        )}   
+                                    </Panel>)}
+                            </Collapse>
+                            :
+                            <Empty />
+                    )}
+                </Col>
+            </Row>
+            <Row style={{ marginTop: 8, marginBottom: 8 }}>
+                <Col span={24}>
+                    {(projects && list.data && list.data.managements.length && projects.length && students && students.length ?
+                            <Collapse accordion>
+                                {students.filter(student => filterProjectsByStudent(student.id).length > 0).map(student => 
+                                    <Panel header={student.first_name} key={student.id}>
+                                        {(filterProjectsByStudent(student.id)).map(elem =>
+                                            <Tag closable onClose={(e) => {e.preventDefault(); onClickDeleteManagement(elem.mId)}} key={elem.project.id}>{elem.project.name}</Tag>
                                         )}   
                                     </Panel>)}
                             </Collapse>
