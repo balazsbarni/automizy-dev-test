@@ -80,7 +80,6 @@ const ListStudent =({reloadListTrigger, setStudents})=>{
                 error: false,
                 complete: false
             })
-            setStudents({data: list.data})
             axios.get('api/student')
             .then(res => {
                     setLoader(false)
@@ -89,7 +88,7 @@ const ListStudent =({reloadListTrigger, setStudents})=>{
                         error: false,
                         complete: true
                     })
-                    setStudents({data: res.data})
+                    setStudents(res.data.students)
                 }
             )
             .catch(() =>{

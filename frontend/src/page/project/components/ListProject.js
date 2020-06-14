@@ -32,7 +32,6 @@ const ListProject = ({ reloadListTrigger, setProjects }) => {
                 error: false,
                 complete: false
             })
-            setProjects({ data: list.data})
             axios.get('api/project')
                 .then(res => {
                     setLoader(false)
@@ -41,7 +40,7 @@ const ListProject = ({ reloadListTrigger, setProjects }) => {
                         error: false,
                         complete: true
                     })
-                    setProjects({ data: res.data})
+                    setProjects(res.data.projects)
                 }
                 )
                 .catch(() => {

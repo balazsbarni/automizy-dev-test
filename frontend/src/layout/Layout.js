@@ -61,7 +61,7 @@ const App = () => {
         </Layout.Sider>
         <Switch>
           <Route exact path="/">
-            <Student/>
+            <Student setStudents={setStudents}/>
           </Route>
           <Route path="/student">
             <Student setStudents={setStudents}/>
@@ -72,6 +72,8 @@ const App = () => {
           <Route path="/management">
             <Management
               projects={projects}
+              setProjects={setProjects}
+              setStudents={setStudents}
               students={students}
             />
           </Route>
