@@ -19,7 +19,7 @@ const { confirm } = Modal
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import "../../layout/Layout.css"
 
-const Student=()=>{
+const Student=({setStudents})=>{
     const [reloadListTrigger, setReloadListTrigger] = useState(null)
     const [showModal, setShowModal] = useState(false)
     // Új tanuló hozzáadása gombra kattintás
@@ -51,7 +51,10 @@ const Student=()=>{
                 </Row>
             </Header>
             <Content className="content">
-                <ListStudent reloadListTrigger={reloadListTrigger}/>
+                <ListStudent 
+                    reloadListTrigger={reloadListTrigger}
+                    setStudents={setStudents}    
+                />
                 <AddStudentModal visible={showModal} onClickCancel={onClickCancel} onDone={onDone}/>
             </Content>
         </Layout>
@@ -59,7 +62,7 @@ const Student=()=>{
 }
 
 // Tanulók listázása
-const ListStudent =({reloadListTrigger})=>{
+const ListStudent =({reloadListTrigger, setStudents})=>{
     const [trigger, setTrigger] = useState()
     const [loader, setLoader] = useState(true)
 
@@ -77,6 +80,7 @@ const ListStudent =({reloadListTrigger})=>{
                 error: false,
                 complete: false
             })
+            setStudents({data: list.data})
             axios.get('api/student')
             .then(res => {
                     setLoader(false)
@@ -85,6 +89,7 @@ const ListStudent =({reloadListTrigger})=>{
                         error: false,
                         complete: true
                     })
+                    setStudents({data: res.data})
                 }
             )
             .catch(() =>{

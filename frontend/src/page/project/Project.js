@@ -6,7 +6,7 @@ import ListProject from './components/ListProject'
 import AddProjectModal from './components/AddProjectModal'
 import ProjectHeader from './components/ProjectHeader'
 
-const Project = () => {
+const Project = ({setProjects}) => {
   const [reloadListTrigger, setReloadListTrigger] = useState(null)
   const [showModal, setShowModal] = useState(false)
 
@@ -22,7 +22,10 @@ const Project = () => {
       <Layout>
           <ProjectHeader onClickAddNewProject={onClickAddNewProject}/>
           <Content className="content">
-              <ListProject reloadListTrigger={reloadListTrigger}/>
+              <ListProject 
+                reloadListTrigger={reloadListTrigger}
+                setProjects={setProjects}
+                />
               <AddProjectModal 
                 visible={showModal} 
                 onClickCancel={onClickCancel} 

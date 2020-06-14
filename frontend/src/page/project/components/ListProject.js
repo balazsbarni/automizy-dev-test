@@ -5,8 +5,6 @@ import {
     Col, 
     Spin, 
     Empty, 
-    List, 
-    Typography, 
     Button, 
     Modal, 
     message } from 'antd'
@@ -16,7 +14,7 @@ const { Panel } = Collapse;
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import "../../../layout/Layout.css"
 
-const ListProject = ({ reloadListTrigger }) => {
+const ListProject = ({ reloadListTrigger, setProjects }) => {
     const [trigger, setTrigger] = useState()
     const [loader, setLoader] = useState(true)
 
@@ -34,6 +32,7 @@ const ListProject = ({ reloadListTrigger }) => {
                 error: false,
                 complete: false
             })
+            setProjects({ data: list.data})
             axios.get('api/project')
                 .then(res => {
                     setLoader(false)
@@ -42,6 +41,7 @@ const ListProject = ({ reloadListTrigger }) => {
                         error: false,
                         complete: true
                     })
+                    setProjects({ data: res.data})
                 }
                 )
                 .catch(() => {
