@@ -24,6 +24,9 @@ const App = () => {
   const [collapsed, setCollapsed] = useState(false)
   const [activeMenu, setActiveMenu] = useState('student')
 
+  const [projects, setProjects] = useState(null)
+  const [students, setStudents] = useState(null)
+
   const handleOnClickMenu = e => {
     setActiveMenu(e.key)
   }
@@ -61,13 +64,16 @@ const App = () => {
             <Student/>
           </Route>
           <Route path="/student">
-            <Student/>
+            <Student setStudents={setStudents}/>
           </Route>
           <Route path="/project">
-            <Project/>
+            <Project setProjects={setProjects}/>
           </Route>
           <Route path="/management">
-            <Management/>
+            <Management
+              projects={projects}
+              students={students}
+            />
           </Route>
         </Switch>
       </Layout>

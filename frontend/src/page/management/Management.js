@@ -3,7 +3,7 @@ import { Layout, Row, Col, Spin, Empty, List, Typography, Button, Modal, message
 const { Title } = Typography
 const { Header, Content } = Layout
 
-const Management=()=>{
+const Management=({projects, students})=>{
     return (
       <Layout>
         <Header className="header">
@@ -11,6 +11,8 @@ const Management=()=>{
         </Header>
         <Content className="content">
           Write frontend code here
+          {console.log(projects)}
+          {console.log(students)}
         </Content>
       </Layout>
     )
