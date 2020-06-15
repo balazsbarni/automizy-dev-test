@@ -33,9 +33,9 @@ const ManagementModel = ({
     }
   }, {
     uniqueKeys: {
-        actions_unique: {
-            fields: ['project_id', 'student_id']
-        }
+      actions_unique: {
+        fields: ['project_id', 'student_id']
+      }
     }
   })
   return Management;
