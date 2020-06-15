@@ -3,12 +3,14 @@ import { Layout, Row, Col, Spin, Empty, List, Typography, Button, Modal, message
 const { Title } = Typography
 const { Header, Content } = Layout
 import ListManagement from './components/ListManagement'
+import ManagementHeader from './components/ManagementHeader'
+import AddManagementModal from './components/AddManagementModal'
 
 const Management=({projects, students, setProjects, setStudents})=>{
   const [reloadListTrigger, setReloadListTrigger] = useState(null)
   const [showModal, setShowModal] = useState(false)
 
-  const onClickAddNewProject =() => { setShowModal(true) }
+  const onClickAddNewManagement =() => { setShowModal(true) }
   const onClickCancel= () => { setShowModal(false) }
   const onDone=({name})=>{
       setShowModal(false)
@@ -18,10 +20,7 @@ const Management=({projects, students, setProjects, setStudents})=>{
 
     return (
       <Layout>
-        <Header className="header">
-            <Title>Management Handler</Title>
-        </Header>
-        <Content className="content">
+        <ManagementHeader onClickAddNewManagement={onClickAddNewManagement}/>
         <Content className="content">
               <ListManagement
                 reloadListTrigger={reloadListTrigger}
@@ -30,8 +29,14 @@ const Management=({projects, students, setProjects, setStudents})=>{
                 students={students}
                 setStudents={setStudents}
                 />
+              <AddManagementModal 
+                visible={showModal} 
+                onClickCancel={onClickCancel} 
+                onDone={onDone}
+                projects={projects}
+                students={students}
+              />
           </Content>
-        </Content>
       </Layout>
     )
 }

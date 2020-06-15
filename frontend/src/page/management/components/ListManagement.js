@@ -1,32 +1,32 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { 
-    Row, 
-    Col, 
-    Spin, 
-    Empty, 
-    Button, 
-    Modal, 
-    message } from 'antd'
+import {
+    Row,
+    Col,
+    Spin,
+    Empty,
+    Modal,
+    message,
+    Tabs,
+    Tag,
+    Collapse
+} from 'antd'
 const { confirm } = Modal
-import { Collapse } from 'antd';
 const { Panel } = Collapse;
-import { Tag } from 'antd';
+const { TabPane } = Tabs;
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import "../../../layout/Layout.css"
+
 
 const ListManagement = ({ reloadListTrigger, projects, students, setProjects, setStudents }) => {
     const [trigger, setTrigger] = useState()
     const [loader, setLoader] = useState(true)
-    const [view, setView] = useState('project')
 
     const [list, setList] = useState({
         data: null,
         complete: false,
         error: false
     })
-
-    const getDistinctProjectId = ()=> list.data.managements.map(e => e.project_id).filter((management, i, arr) => arr.indexOf(management) === i)
 
     useEffect(
         () => {
@@ -44,7 +44,7 @@ const ListManagement = ({ reloadListTrigger, projects, students, setProjects, se
                         error: false,
                         complete: true
                     })
-                }) 
+                })
                 .catch(() => {
                     setLoader(false)
                     setList({
@@ -53,32 +53,34 @@ const ListManagement = ({ reloadListTrigger, projects, students, setProjects, se
                         complete: true
                     })
                 })
-                projects ? null : 
-                           axios.get('api/project')
-                            .then(result => {
-                                setProjects(result.data.projects)})
-                            .catch(() => {
-                                setLoader(false)
-                                setList({
-                                    data: null,
-                                    error: true,
-                                    complete: true
-                                })
-                })
+            !projects ?
+                axios.get('api/project')
+                    .then(result => {
+                        setProjects(result.data.projects)
+                    })
+                    .catch(() => {
+                        setLoader(false)
+                        setList({
+                            data: null,
+                            error: true,
+                            complete: true
+                        })
+                    }) : null
 
-                students ? null : 
+            !students ?
                 axios.get('api/student')
-                 .then(result => {
-                     setStudents(result.data.students)})
-                 .catch(() => {
-                     setLoader(false)
-                     setList({
-                         data: null,
-                         error: true,
-                         complete: true
-                     })
-     })
-            },
+                    .then(result => {
+                        setStudents(result.data.students)
+                    })
+                    .catch(() => {
+                        setLoader(false)
+                        setList({
+                            data: null,
+                            error: true,
+                            complete: true
+                        })
+                    }) : null
+        },
         [trigger, reloadListTrigger]
     )
 
@@ -100,11 +102,10 @@ const ListManagement = ({ reloadListTrigger, projects, students, setProjects, se
         setLoader(true)
         axios.delete('api/management/' + id)
             .then(res => {
-                message.success('Deleted'+ id)
+                message.success('Deleted' + id)
                 setLoader(false)
                 setTrigger(new Date().getTime())
-            }
-            )
+            })
             .catch(() =>
                 setLoader(false)
             )
@@ -128,38 +129,44 @@ const ListManagement = ({ reloadListTrigger, projects, students, setProjects, se
 
     return (
         <Spin size="large" spinning={loader}>
-            <Row style={{ marginTop: 8, marginBottom: 8 }}>
-                <Col span={24}>
-                    {(projects && list.data && list.data.managements.length && projects.length && students && students.length ?
-                            <Collapse accordion>
-                                {projects.filter(project => filterStudentsByProject(project.id).length > 0).map(project => 
-                                    <Panel header={project.name} key={project.id}>
-                                        {(filterStudentsByProject(project.id)).map(elem =>
-                                            <Tag closable onClose={(e) => {e.preventDefault(); onClickDeleteManagement(elem.mId)}} key={elem.student.id} >{elem.student.first_name + ' ' + elem.student.last_name}</Tag>
-                                        )}   
-                                    </Panel>)}
-                            </Collapse>
-                            :
-                            <Empty />
-                    )}
-                </Col>
-            </Row>
-            <Row style={{ marginTop: 8, marginBottom: 8 }}>
-                <Col span={24}>
-                    {(projects && list.data && list.data.managements.length && projects.length && students && students.length ?
-                            <Collapse accordion>
-                                {students.filter(student => filterProjectsByStudent(student.id).length > 0).map(student => 
-                                    <Panel header={student.first_name} key={student.id}>
-                                        {(filterProjectsByStudent(student.id)).map(elem =>
-                                            <Tag closable onClose={(e) => {e.preventDefault(); onClickDeleteManagement(elem.mId)}} key={elem.project.id}>{elem.project.name}</Tag>
-                                        )}   
-                                    </Panel>)}
-                            </Collapse>
-                            :
-                            <Empty />
-                    )}
-                </Col>
-            </Row>
+            <Tabs defaultActiveKey="1">
+                <TabPane tab="Management list by projects" key="1">
+                    <Row style={{ marginTop: 8, marginBottom: 8 }}>
+                        <Col span={24}>
+                            {(projects && list.data && list.data.managements.length && projects.length && students && students.length ?
+                                <Collapse accordion>
+                                    {projects.filter(project => filterStudentsByProject(project.id).length > 0).map(project =>
+                                        <Panel header={project.name} key={project.id}>
+                                            {(filterStudentsByProject(project.id)).map(elem =>
+                                                <Tag closable onClose={(e) => { e.preventDefault(); onClickDeleteManagement(elem.mId) }} key={elem.student.id} >{elem.student.first_name + ' ' + elem.student.last_name}</Tag>
+                                            )}
+                                        </Panel>)}
+                                </Collapse>
+                                :
+                                <Empty />
+                            )}
+                        </Col>
+                    </Row>
+                </TabPane>
+                <TabPane tab="Management list by students" key="2">
+                    <Row style={{ marginTop: 8, marginBottom: 8 }}>
+                        <Col span={24}>
+                            {(projects && list.data && list.data.managements.length && projects.length && students && students.length ?
+                                <Collapse accordion>
+                                    {students.filter(student => filterProjectsByStudent(student.id).length > 0).map(student =>
+                                        <Panel header={student.first_name + ' ' + student.last_name} key={student.id}>
+                                            {(filterProjectsByStudent(student.id)).map(elem =>
+                                                <Tag closable onClose={(e) => { e.preventDefault(); onClickDeleteManagement(elem.mId) }} key={elem.project.id}>{elem.project.name}</Tag>
+                                            )}
+                                        </Panel>)}
+                                </Collapse>
+                                :
+                                <Empty />
+                            )}
+                        </Col>
+                    </Row>
+                </TabPane>
+            </Tabs>
         </Spin>
     )
 }
