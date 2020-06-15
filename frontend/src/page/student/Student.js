@@ -19,7 +19,7 @@ const { confirm } = Modal
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import "../../layout/Layout.css"
 
-const Student=({setStudents})=>{
+const Student=({ list, setList })=>{
     const [reloadListTrigger, setReloadListTrigger] = useState(null)
     const [showModal, setShowModal] = useState(false)
     // Új tanuló hozzáadása gombra kattintás
@@ -53,7 +53,8 @@ const Student=({setStudents})=>{
             <Content className="content">
                 <ListStudent 
                     reloadListTrigger={reloadListTrigger}
-                    setStudents={setStudents}    
+                    list={list}
+                    setList={setList}  
                 />
                 <AddStudentModal visible={showModal} onClickCancel={onClickCancel} onDone={onDone}/>
             </Content>
@@ -62,42 +63,38 @@ const Student=({setStudents})=>{
 }
 
 // Tanulók listázása
-const ListStudent =({reloadListTrigger, setStudents})=>{
+const ListStudent =({reloadListTrigger, setStudents, list, setList})=>{
     const [trigger, setTrigger] = useState()
     const [loader, setLoader] = useState(true)
 
-    const [list, setList] = useState({
-        data: null,
-        complete: false,
-        error: false
-    })
     // Tanulók betöltése
     useEffect(
         () => {
             setLoader(true)
-            setList({
-                data: list.data,
+            setList(prevList => ({
+                ...prevList,
                 error: false,
                 complete: false
-            })
+            }))
             axios.get('api/student')
             .then(res => {
                     setLoader(false)
-                    setList({
-                        data: res.data,
+                    setList(prevList => ({ 
+                        ...prevList,
+                        studentData: res.data.students,
                         error: false,
                         complete: true
-                    })
-                    setStudents(res.data.students)
+                    }))
                 }
             )
             .catch(() =>{
                     setLoader(false)
-                    setList({
-                        data: null,
+                    setList(prevList => ({
+                        ...prevList,
+                        studentData: null,
                         error: true,
                         complete: true
-                    })
+                    }))
                 }
             )
         },
@@ -139,11 +136,12 @@ const ListStudent =({reloadListTrigger, setStudents})=>{
         <Row style={{ marginTop: 8, marginBottom: 8 }}>
             <Col span={24}>
                 {(list.complete && (
-                    list.data &&
-                    list.data.students.length ?
+                    list.studentData &&
+                    list.studentData.length ?
                     <List
                         bordered
-                        dataSource={list.data.students}
+                        dataSource={list.studentData}
+                        
                         renderItem={item => (
                             <List.Item>
                                 <Typography.Text strong>
@@ -154,7 +152,7 @@ const ListStudent =({reloadListTrigger, setStudents})=>{
                                 </Typography.Text>
                                 <Button 
                                     type="primary"
-                                    onClick={ ({id = item.id, name = item.first_name + " " + item.last_name }) => onClickDeleteStudent({id: id, name: name})}>
+                                    onClick={({id = item.id, name = item.first_name + " " + item.last_name }) => onClickDeleteStudent({id: id, name: name})}>
                                     Delete
                                 </Button>
                             </List.Item>
