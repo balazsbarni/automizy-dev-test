@@ -24,8 +24,13 @@ const App = () => {
   const [collapsed, setCollapsed] = useState(false)
   const [activeMenu, setActiveMenu] = useState('student')
 
-  const [projects, setProjects] = useState(null)
-  const [students, setStudents] = useState(null)
+  const [list, setList] = useState({
+    studentData: null,
+    projectData: null,
+    managementData: null,
+    complete: false,
+    error: false
+  })
 
   const handleOnClickMenu = e => {
     setActiveMenu(e.key)
@@ -33,21 +38,21 @@ const App = () => {
   return (
     <Router>
       <Layout className="layout">
-        <Layout.Sider 
-          trigger={null} 
-          collapsible 
+        <Layout.Sider
+          trigger={null}
+          collapsible
           collapsed={collapsed}
           className={"sider"}
-          >
-          <img 
+        >
+          <img
             className={collapsed ? "logo-hide" : "logo"}
             src={logo}
-            alt={""}/>
-          <Menu 
-            theme="dark" 
+            alt={""} />
+          <Menu
+            theme="dark"
             mode="inline"
             selectedKeys={[activeMenu]}
-            onClick={ e => handleOnClickMenu(e) }>
+            onClick={e => handleOnClickMenu(e)}>
             <Menu.Item key="student" icon={<UserOutlined />}>
               <Link to="/student">Student</Link>
             </Menu.Item>
@@ -61,20 +66,27 @@ const App = () => {
         </Layout.Sider>
         <Switch>
           <Route exact path="/">
-            <Student setStudents={setStudents}/>
+            <Student
+              list={list}
+              setList={setList}
+            />
           </Route>
           <Route path="/student">
-            <Student setStudents={setStudents}/>
+            <Student
+              list={list}
+              setList={setList}
+            />
           </Route>
           <Route path="/project">
-            <Project setProjects={setProjects}/>
+            <Project
+              list={list}
+              setList={setList}
+            />
           </Route>
           <Route path="/management">
             <Management
-              projects={projects}
-              setProjects={setProjects}
-              setStudents={setStudents}
-              students={students}
+              list={list}
+              setList={setList}
             />
           </Route>
         </Switch>
