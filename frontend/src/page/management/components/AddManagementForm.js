@@ -4,22 +4,6 @@ const { Option } = Select;
 
 const AddManagementForm = ({ form, students, projects, managements }) => {
 
-    function onChange(value) {
-        console.log(`selected ${value}`);
-      }
-      
-      function onBlur() {
-        console.log('blur');
-      }
-      
-      function onFocus() {
-        console.log('focus');
-      }
-      
-      function onSearch(val) {
-        console.log('search:', val);
-      }
-
     return (
         <Form form={form} layout="vertical">
             <Form.Item
@@ -31,10 +15,6 @@ const AddManagementForm = ({ form, students, projects, managements }) => {
                     showSearch
                     placeholder="Select a project"
                     optionFilterProp="children"
-                    onChange={onChange}
-                    onFocus={onFocus}
-                    onBlur={onBlur}
-                    onSearch={onSearch}
                     filterOption={(input, option) =>
                         option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                     }
@@ -46,16 +26,12 @@ const AddManagementForm = ({ form, students, projects, managements }) => {
             <Form.Item
                 label={'Student name'}
                 name="student"
-                rules={[{ required: false, message: 'Please select the student!' }]}
+                rules={[{ required: true, message: 'Please select the student!' }]}
             >
                 <Select
                     showSearch
                     placeholder="Select a student"
                     optionFilterProp="children"
-                    onChange={onChange}
-                    onFocus={onFocus}
-                    onBlur={onBlur}
-                    onSearch={onSearch}
                     filterOption={(input, option) =>
                         option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                     }

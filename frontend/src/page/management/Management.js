@@ -12,10 +12,10 @@ const Management=({projects, students, setProjects, setStudents})=>{
 
   const onClickAddNewManagement =() => { setShowModal(true) }
   const onClickCancel= () => { setShowModal(false) }
-  const onDone=({name})=>{
+  const onDone=()=>{
       setShowModal(false)
       setReloadListTrigger(new Date().getTime())
-      message.success('The following project has been saved: ' + name)
+      message.success('Student added to project')
   }
 
     return (

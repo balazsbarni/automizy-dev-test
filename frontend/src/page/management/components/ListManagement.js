@@ -102,7 +102,7 @@ const ListManagement = ({ reloadListTrigger, projects, students, setProjects, se
         setLoader(true)
         axios.delete('api/management/' + id)
             .then(res => {
-                message.success('Deleted' + id)
+                message.success('Deleted')
                 setLoader(false)
                 setTrigger(new Date().getTime())
             })

@@ -27,19 +27,19 @@ const AddManagementModal = ({visible, onClickCancel, onDone, students, projects}
         })
             .then(() => {
                 form.resetFields()
-                onDone({ name: 'Zoli' })
+                onDone()
             })
             .catch((err) => {
                 if (err.response.status === 409) {
-                    setDuplicationErrorMessage({ name: err.response.data.error })
+                    setDuplicationErrorMessage()
                 }
             })
     }
-    const setDuplicationErrorMessage = ({ name }) => {
+    const setDuplicationErrorMessage = () => {
         form.setFields([
             {
-                name: 'management',
-                errors: ["Alredy exists"]
+                name: 'student',
+                errors: ['Already assigned to project']
             }
         ])
     }
