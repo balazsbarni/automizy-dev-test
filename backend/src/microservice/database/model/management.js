@@ -31,6 +31,12 @@ const ManagementModel = ({
       type: DATE,
       defaultValue: NOW
     }
+  }, {
+    uniqueKeys: {
+        actions_unique: {
+            fields: ['project_id', 'student_id']
+        }
+    }
   })
   return Management;
 }
