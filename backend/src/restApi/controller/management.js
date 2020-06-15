@@ -76,7 +76,15 @@ exports.create = async (req, res, next) => {
         })
         res.status(201).json(result)
     } catch(e){
-        res.status(500).json(e)
+        switch(e?.details){
+            case 'ALREADY_EXISTS':
+                res.status(409).json({
+                    error: e.metadata.getMap()
+                })
+                break
+            default:
+                res.status(500).json(e)
+        }
     }
 }
 

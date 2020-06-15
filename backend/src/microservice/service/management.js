@@ -22,14 +22,14 @@ const managementModel = ManagementModel(db)
 const projectModel = ProjectModel(db)
 const studentModel = StudentModel(db)
 
-managementModel.hasOne(studentModel, { constraints: false, foreignKey: 'id', sourceKey: 'student_id'})
-managementModel.hasOne(projectModel, { constraints: false, foreignKey: 'id', sourceKey: 'project_id'})
+managementModel.hasOne(studentModel, { constraints: false, foreignKey: 'id', sourceKey: 'student_id' })
+managementModel.hasOne(projectModel, { constraints: false, foreignKey: 'id', sourceKey: 'project_id' })
 
 const List = async (call, callback) => {
     try {
         const result = await managementModel.findAll()
         callback(null, { managements: result })
-    } catch(err) {
+    } catch (err) {
         callback({
             code: grpc.status.ABORTED,
             details: 'Aborted'
@@ -42,11 +42,20 @@ const Create = async (call, callback) => {
     try {
         const result = await managementModel.create(management)
         callback(null, result)
-    } catch(err) {
-        callback({
-            code: grpc.status.ABORTED,
-            details: 'ABORTED'
-        })
+    } catch (err) {
+        switch (err.name) {
+            case 'SequelizeUniqueConstraintError':
+                const jsErr = new Error('ALREADY_EXISTS')
+                jsErr.code = grpc.status.ALREADY_EXISTS
+                jsErr.metadata = dbErrorCollector({ errors: err.errors })
+                callback(jsErr)
+                break
+            default:
+                callback({
+                    code: grpc.status.ABORTED,
+                    details: "ABORTED"
+                })
+        }
     }
 }
 
@@ -54,7 +63,7 @@ const Read = async (call, callback) => {
     const id = call.request.id
     try {
         const result = await managementModel.findByPk(id)
-        if(result) {
+        if (result) {
             callback(null, result)
         } else {
             callback({
@@ -62,7 +71,7 @@ const Read = async (call, callback) => {
                 details: 'Not found'
             })
         }
-    } catch(err) {
+    } catch (err) {
         callback({
             code: grpc.status.ABORTED,
             details: 'Aborted'
@@ -74,7 +83,7 @@ const Delete = async (call, callback) => {
     const id = call.request.id
     try {
         const result = await managementModel.destroy({ where: { 'id': id } })
-        if(result) {
+        if (result) {
             callback(null, result)
         } else {
             callback({
@@ -82,7 +91,7 @@ const Delete = async (call, callback) => {
                 details: 'Not found'
             })
         }
-    } catch(err) {
+    } catch (err) {
         callback({
             code: grpc.status.ABORTED,
             details: 'Aborted'
@@ -95,10 +104,10 @@ const ListByProject = async (call, callback) => {
     try {
         const result = await managementModel.findAll({
             include: [{
-              model: studentModel,
+                model: studentModel,
             }],
             where: { project_id: id }
-          })
+        })
         const students = result.map(e => {
             const studentData = {}
             studentData.id = e.dataValues.student.id
@@ -110,7 +119,7 @@ const ListByProject = async (call, callback) => {
             studentData.managementId = e.dataValues.id
             return studentData
         })
-        if(result) {
+        if (result) {
             callback(null, { students })
         } else {
             callback({
@@ -118,7 +127,7 @@ const ListByProject = async (call, callback) => {
                 details: 'Not found'
             })
         }
-    } catch(err) {
+    } catch (err) {
         callback({
             code: grpc.status.ABORTED,
             details: 'Aborted'
@@ -131,12 +140,12 @@ const ListByStudent = async (call, callback) => {
     try {
         const result = await managementModel.findAll({
             include: [{
-              model: projectModel,
+                model: projectModel,
             }],
             where: { student_id: id }
-          })
+        })
         const projects = result.map(e => e.project)
-        if(result) {
+        if (result) {
             callback(null, { projects })
         } else {
             callback({
@@ -144,7 +153,7 @@ const ListByStudent = async (call, callback) => {
                 details: 'Not found'
             })
         }
-    } catch(err) {
+    } catch (err) {
         callback({
             code: grpc.status.ABORTED,
             details: 'Aborted'
@@ -152,7 +161,7 @@ const ListByStudent = async (call, callback) => {
     }
 }
 
-const dbErrorCollector=({errors}) => {
+const dbErrorCollector = ({ errors }) => {
     const metadata = new grpc.Metadata()
     const error = errors.map(item => {
         metadata.set(item.path, item.type)
@@ -170,7 +179,7 @@ const exposedFunctions = {
 }
 
 server.addService(managementProto.ManagementService.service, exposedFunctions)
-server.bind(config.management.host +':'+ config.management.port, grpc.ServerCredentials.createInsecure())
+server.bind(config.management.host + ':' + config.management.port, grpc.ServerCredentials.createInsecure())
 
 db.sequelize.sync().then(() => {
     console.log('Re-sync db.')
