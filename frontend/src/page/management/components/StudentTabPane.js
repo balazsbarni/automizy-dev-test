@@ -10,7 +10,8 @@ import {
 } from 'antd'
 const { Panel } = Collapse;
 
-const StudentTabPane = ({ list }) => {
+
+const StudentTabPane = ({ list, onClickDeleteManagement }) => {
   return (
     <Row style={{ marginTop: 8, marginBottom: 8 }}>
       <Col span={24}>

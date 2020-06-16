@@ -20,6 +20,7 @@ import getData from '../utils/getData'
 import ProjectTabPane from './ProjectTabPane'
 import StudentTabPane from './StudentTabPane'
 
+
 const ListManagement = ({ reloadListTrigger, list, setList }) => {
   const [trigger, setTrigger] = useState()
   const [loader, setLoader] = useState(true)
@@ -60,10 +61,10 @@ const ListManagement = ({ reloadListTrigger, list, setList }) => {
     <Spin size="large" spinning={loader}>
       <Tabs defaultActiveKey="1">
         <TabPane tab="Management list by projects" key="1">
-          <ProjectTabPane list={list}/>
+          <ProjectTabPane list={list} onClickDeleteManagement={onClickDeleteManagement}/>
         </TabPane>
         <TabPane tab="Management list by students" key="2">
-          <StudentTabPane list={list}/>
+          <StudentTabPane list={list} onClickDeleteManagement={onClickDeleteManagement}/>
         </TabPane>
       </Tabs>
     </Spin>

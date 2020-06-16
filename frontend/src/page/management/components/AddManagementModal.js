@@ -35,6 +35,7 @@ const AddManagementModal = ({ visible, onClickCancel, onDone, list }) => {
         }
       })
   }
+  
   const setDuplicationErrorMessage = () => {
     form.setFields([
       {

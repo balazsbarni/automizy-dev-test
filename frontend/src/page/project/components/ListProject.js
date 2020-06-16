@@ -14,40 +14,14 @@ const { confirm } = Modal
 const { Panel } = Collapse
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import '../../../layout/Layout.css'
+import getData from '../utils/getData'
 
 const ListProject = ({ reloadListTrigger, list, setList }) => {
   const [trigger, setTrigger] = useState()
   const [loader, setLoader] = useState(true)
 
   useEffect(
-    () => {
-      setLoader(true)
-      setList(prevList => ({
-        ...prevList,
-        error: false,
-        complete: false
-      }))
-      axios.get('api/project')
-        .then(res => {
-          setLoader(false)
-          setList(prevList => ({
-            ...prevList,
-            projectData: res.data.projects,
-            error: false,
-            complete: true
-          }))
-        })
-        .catch(() => {
-          setLoader(false)
-          setList(prevList => ({
-            ...prevList,
-            projectData: null,
-            error: true,
-            complete: true
-          }))
-        }
-        )
-    },
+    () => getData(setLoader, setList),
     [trigger, reloadListTrigger]
   )
 
