@@ -19,7 +19,7 @@ const StudentTabPane = ({ list }) => {
             {list.studentData.filter(student => filterProjectsByStudent(student.id, list).length > 0).map(student =>
               <Panel header={student.first_name + ' ' + student.last_name} key={student.id}>
                 {(filterProjectsByStudent(student.id, list)).map(elem =>
-                  <Tag closable onClose={(e) => { e.preventDefault(); onClickDeleteManagement(elem.mId) }} key={elem.project.id}>{elem.project.name}</Tag>
+                  <Tag closable onClose={(e) => { e.preventDefault(); onClickDeleteManagement(elem.managementId) }} key={elem.project.id}>{elem.project.name}</Tag>
                 )}
               </Panel>)}
           </Collapse>
