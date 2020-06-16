@@ -51,7 +51,6 @@ message Student {
    string email = 4;
    string createdAt = 5;
    string updatedAt = 6;
-   string managementId = 7;
 }
 
 message StudentList {

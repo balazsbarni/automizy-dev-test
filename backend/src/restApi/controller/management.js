@@ -88,7 +88,6 @@ exports.create = async (req, res, next) => {
     }
 }
 
-
 const managementDelete = (options) => {
     return new Promise((resolve, reject) => {
       client.Delete(options, (error, response) => {
