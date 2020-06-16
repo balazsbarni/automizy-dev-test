@@ -13,3 +13,16 @@ services:
       MYSQL_DATABASE: app
 #    volumes:
 #      - ./migrations:/docker-entrypoint-initdb.d/
+  frontend:
+    build: 
+        context: '../frontend'
+        dockerfile: Dockerfile
+    command: yarn start
+    container_name: frontend
+    ports:
+        - "8080:8080"        
+    volumes: 
+        - ./frontend
+        - ./frontend/node_modules
+
+
