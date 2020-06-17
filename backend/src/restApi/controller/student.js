@@ -4,6 +4,7 @@ import grpc from 'grpc'
 const protoLoader = require("@grpc/proto-loader")
 import config from '../../config/service'
 const PROTO_PATH = path.join(__dirname, '../../proto/student.proto')
+const SERVICE_HOST = process.env.STUDENT_HOST || config.student.host
 
 exports.validationRules = (method) => {
     switch (method) {
@@ -40,7 +41,7 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 
 // Load in our service definition
 const studentProto = grpc.loadPackageDefinition(packageDefinition).student
-const client = new studentProto.StudentService(config.student.host +':'+ config.student.port, grpc.credentials.createInsecure())
+const client = new studentProto.StudentService(SERVICE_HOST +':'+ config.student.port, grpc.credentials.createInsecure())
 
 const studentList = (options) => {
     return new Promise((resolve, reject) => {

@@ -6,6 +6,8 @@ const protoLoader = require("@grpc/proto-loader")
 
 const PROTO_PATH = path.join(__dirname, '../../proto/project.proto')
 
+const SERVICE_HOST = process.env.PROJECT_HOST || config.project.host
+
 exports.validationRules = (method) => {
     switch (method) {
         case 'create': {
@@ -38,7 +40,7 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 })
 
 const projectProto = grpc.loadPackageDefinition(packageDefinition).project
-const client = new projectProto.ProjectService(config.project.host +':'+ config.project.port, grpc.credentials.createInsecure())
+const client = new projectProto.ProjectService(SERVICE_HOST + ':'+ config.project.port, grpc.credentials.createInsecure())
 
 const projectList = (options) => {
     return new Promise((resolve, reject) => {
@@ -81,13 +83,7 @@ exports.create = async (req, res, next) => {
             'name': req.body.name,
             'description': req.body.desc
         })
-        res.status(201).json({
-            id: result.id,
-            name: result.name,
-            desc: result.description,
-            updatedAt: result.updatedAt,
-            createdAt: result.createdAt
-        })
+        res.status(201).json(result)
     } catch(e){
         switch(e?.details){
             case 'ALREADY_EXISTS':

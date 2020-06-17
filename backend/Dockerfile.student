@@ -1,0 +1,19 @@
+# get the base node image
+FROM node:alpine as builder
+
+# set the working dir for container
+WORKDIR /student
+
+# copy the json file first
+COPY ./package.json /student
+
+# install npm dependencies
+RUN yarn install
+
+# copy other project files
+COPY . .
+
+EXPOSE 50053
+
+# build the folder
+CMD [ "yarn", "start:micro:student" ]

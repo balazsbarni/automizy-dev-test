@@ -5,6 +5,7 @@ import config from '../../config/service'
 const protoLoader = require("@grpc/proto-loader")
 
 const PROTO_PATH = path.join(__dirname, '../../proto/management.proto')
+const SERVICE_HOST = process.env.MANAGEMENT_HOST || config.management.host
 
 exports.validationRules = (method) => {
     switch (method) {
@@ -39,7 +40,7 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 })
 
 const managementProto = grpc.loadPackageDefinition(packageDefinition).management
-const client = new managementProto.ManagementService(config.management.host +':'+ config.management.port, grpc.credentials.createInsecure())
+const client = new managementProto.ManagementService(SERVICE_HOST +':'+ config.management.port, grpc.credentials.createInsecure())
 
 const managementList = (options) => {
     return new Promise((resolve, reject) => {

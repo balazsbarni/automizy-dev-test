@@ -1,0 +1,19 @@
+# get the base node image
+FROM node:alpine as builder
+
+# set the working dir for container
+WORKDIR /rest
+
+# copy the json file first
+COPY ./package.json /rest
+
+# install npm dependencies
+RUN yarn install
+
+# copy other project files
+COPY . .
+
+EXPOSE 3000
+
+# build the folder
+CMD [ "yarn", "start:rest"]
