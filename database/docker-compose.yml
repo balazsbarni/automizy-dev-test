@@ -6,11 +6,12 @@ services:
     ports:
       - 3308:3306
     restart: always
+    container_name: db
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: user
       MYSQL_PASSWORD: password
-      MYSQL_DATABASE: app
+      MYSQL_DATABASE: app   
 #    volumes:
 #      - ./migrations:/docker-entrypoint-initdb.d/
   frontend:
@@ -24,5 +25,72 @@ services:
     volumes: 
         - ./frontend
         - ./frontend/node_modules
-
-
+  student:
+    build: 
+      context: '../backend'
+      dockerfile: Dockerfile.student
+    command: yarn start:micro:student
+    container_name: student
+    ports:
+        - "50053:50053"        
+    volumes: 
+        - ./student
+        - ./student/node_modules
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+    depends_on:
+        - db
+  project:
+    build: 
+      context: '../backend'
+      dockerfile: Dockerfile.project
+    command: yarn start:micro:project
+    container_name: project
+    ports:
+      - "50054:50054"        
+    volumes: 
+      - ./project
+      - ./project/node_modules
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+    depends_on:
+        - db      
+  management:
+    build: 
+      context: '../backend'
+      dockerfile: Dockerfile.management
+    command: yarn start:micro:management
+    container_name: management
+    ports:
+      - "50055:50055"        
+    volumes: 
+      - ./management
+      - ./management/node_modules
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+    depends_on:
+        - db
+  rest:
+    build: 
+      context: '../backend'
+      dockerfile: Dockerfile.rest
+    command: yarn start:rest
+    container_name: rest
+    ports:
+      - "3000:3000"        
+    volumes: 
+      - ./rest
+      - ./rest/node_modules
+    environment:
+      STUDENT_HOST: student
+      PROJECT_HOST: project
+      MANAGEMENT_HOST: management
+    depends_on:
+        - db
+        - student
+        - project
+        - management
+         
