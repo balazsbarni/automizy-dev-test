@@ -1,0 +1,567 @@
+{
+"id": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+"name": "AutomizyDevTest",
+"description": null,
+"auth": null,
+"events": null,
+"variables": [],
+"order": [
+  "0f119064-38af-4415-a823-33b6808a316a"
+],
+"folders_order": [
+  "88c3d9b2-1962-4bd4-bdc7-30aa8dd8840c",
+  "e979a043-869a-4f9b-b9ad-0fa00ed592d0",
+  "4aeb9c56-1ad5-4de8-9ed6-70716fa90437"
+],
+"protocolProfileBehavior": {},
+"folders": [
+  {
+    "id": "4aeb9c56-1ad5-4de8-9ed6-70716fa90437",
+    "name": "management",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "collection": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+    "folder": null,
+    "order": [
+      "56087fc4-a7aa-4640-a6fe-cb75993bbd10",
+      "97205821-fe27-4afa-9579-5e00e7ec596a",
+      "b1484c7b-3bae-402e-a75b-12b4721deacf",
+      "371b34ad-c91f-4899-b2c3-cd289788ed32",
+      "bb1f6498-5a47-4cc4-8881-47feb149d5cf"
+    ],
+    "folders_order": [],
+    "protocolProfileBehavior": {},
+    "collectionId": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+    "folderId": "4aeb9c56-1ad5-4de8-9ed6-70716fa90437"
+  },
+  {
+    "id": "e979a043-869a-4f9b-b9ad-0fa00ed592d0",
+    "name": "project",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "collection": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+    "folder": null,
+    "order": [
+      "1d40b23c-738f-49b8-bb83-e76618a623ce",
+      "c5afd90b-ce5e-4c4c-9566-44a0579eeb5f",
+      "850056db-d37d-46ba-a5ed-20cd024a8f05",
+      "0c03845e-1eb4-4d7f-a71a-3492818515b3",
+      "766a01af-cccd-49db-9395-4518975a4df9",
+      "9cf2fc54-8091-45ec-8ab4-5c9767a5fa90"
+    ],
+    "folders_order": [],
+    "protocolProfileBehavior": {},
+    "collectionId": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+    "folderId": "e979a043-869a-4f9b-b9ad-0fa00ed592d0"
+  },
+  {
+    "id": "88c3d9b2-1962-4bd4-bdc7-30aa8dd8840c",
+    "name": "student",
+    "description": null,
+    "auth": null,
+    "events": null,
+    "collection": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+    "folder": null,
+    "order": [
+      "935a318e-f3f7-4010-b77f-6013f52d9b49",
+      "30100aa2-2421-429f-9a5e-2798ef0df4ae",
+      "18f7ce18-6d0c-4ed1-be2b-e38290522cd1",
+      "5ed64ab7-bc9d-4024-bec3-b773c9a25492",
+      "34082c42-17f4-4340-b785-32221014d540"
+    ],
+    "folders_order": [],
+    "protocolProfileBehavior": {},
+    "collectionId": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+    "folderId": "88c3d9b2-1962-4bd4-bdc7-30aa8dd8840c"
+  }
+],
+"requests": [
+  {
+    "id": "0c03845e-1eb4-4d7f-a71a-3492818515b3",
+    "name": "localhost:3000/api/project",
+    "url": "localhost:3000/api/project/1",
+    "description": "",
+    "data": [],
+    "dataOptions": {
+      "raw": {
+        "language": "json"
+      }
+    },
+    "dataMode": "raw",
+    "headerData": null,
+    "method": "GET",
+    "pathVariableData": [],
+    "queryParams": [],
+    "auth": null,
+    "events": null,
+    "folder": "e979a043-869a-4f9b-b9ad-0fa00ed592d0",
+    "protocolProfileBehavior": {
+      "disableBodyPruning": true
+    },
+    "currentHelper": null,
+    "helperAttributes": null,
+    "collectionId": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+    "rawModeData": "{\n\t\"name\":\"MyOtherProject\",\n\t\"desc\":\"my other awsome project description\"\n}",
+    "pathVariables": {}
+  },
+  {
+    "id": "0f119064-38af-4415-a823-33b6808a316a",
+    "name": "localhost:3000/api/management",
+    "url": "localhost:3000/api/management",
+    "description": "",
+    "data": [],
+    "dataOptions": {
+      "raw": {
+        "language": "json"
+      }
+    },
+    "dataMode": "raw",
+    "headerData": null,
+    "method": "POST",
+    "pathVariableData": [],
+    "queryParams": [],
+    "auth": null,
+    "events": null,
+    "folder": null,
+    "currentHelper": null,
+    "helperAttributes": null,
+    "collectionId": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+    "rawModeData": "{\r\n    \"student_id\": 1,\r\n    \"project_id\": 1\r\n}",
+    "pathVariables": {}
+  },
+  {
+    "id": "18f7ce18-6d0c-4ed1-be2b-e38290522cd1",
+    "name": "Read",
+    "url": "localhost:3000/api/student/1",
+    "description": null,
+    "data": null,
+    "dataOptions": null,
+    "dataMode": null,
+    "headerData": [],
+    "method": "GET",
+    "pathVariableData": [],
+    "queryParams": [],
+    "auth": null,
+    "events": null,
+    "folder": "88c3d9b2-1962-4bd4-bdc7-30aa8dd8840c",
+    "currentHelper": null,
+    "helperAttributes": null,
+    "collectionId": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+    "headers": "",
+    "pathVariables": {}
+  },
+  {
+    "id": "1d40b23c-738f-49b8-bb83-e76618a623ce",
+    "name": "localhost:3000/api/project",
+    "url": "localhost:3000/api/project",
+    "description": "",
+    "data": [],
+    "dataOptions": {
+      "raw": {
+        "language": "json"
+      }
+    },
+    "dataMode": "raw",
+    "headerData": null,
+    "method": "POST",
+    "pathVariableData": [],
+    "queryParams": [],
+    "auth": null,
+    "events": null,
+    "folder": "e979a043-869a-4f9b-b9ad-0fa00ed592d0",
+    "currentHelper": null,
+    "helperAttributes": null,
+    "collectionId": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+    "rawModeData": "{\n\t\"name\":\"MyProject\",\n\t\"desc\":\"my awsome project description\"\n}",
+    "pathVariables": {}
+  },
+  {
+    "id": "30100aa2-2421-429f-9a5e-2798ef0df4ae",
+    "name": "Create",
+    "url": "localhost:3000/api/student",
+    "description": null,
+    "data": [],
+    "dataOptions": {
+      "raw": {
+        "language": "json"
+      }
+    },
+    "dataMode": "raw",
+    "headerData": [],
+    "method": "POST",
+    "pathVariableData": [],
+    "queryParams": [],
+    "auth": null,
+    "events": null,
+    "folder": "88c3d9b2-1962-4bd4-bdc7-30aa8dd8840c",
+    "currentHelper": null,
+    "helperAttributes": null,
+    "collectionId": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+    "rawModeData": "{\n\t\"first_name\": \"Ford\",\n    \"last_name\": \"Fairlane\", \n    \"email\": \"ford.fairlane@mail.com\"\n}",
+    "headers": "",
+    "pathVariables": {}
+  },
+  {
+    "id": "34082c42-17f4-4340-b785-32221014d540",
+    "name": "Delete",
+    "url": "localhost:3000/api/student/1",
+    "description": null,
+    "data": null,
+    "dataOptions": null,
+    "dataMode": null,
+    "headerData": [],
+    "method": "DELETE",
+    "pathVariableData": [],
+    "queryParams": [],
+    "auth": null,
+    "events": null,
+    "folder": "88c3d9b2-1962-4bd4-bdc7-30aa8dd8840c",
+    "currentHelper": null,
+    "helperAttributes": null,
+    "collectionId": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+    "headers": "",
+    "pathVariables": {}
+  },
+  {
+    "id": "371b34ad-c91f-4899-b2c3-cd289788ed32",
+    "name": "localhost:3000/api/management",
+    "url": "localhost:3000/api/management/project/1",
+    "description": "",
+    "data": [],
+    "dataOptions": {
+      "raw": {
+        "language": "json"
+      }
+    },
+    "dataMode": "raw",
+    "headerData": null,
+    "method": "GET",
+    "pathVariableData": [],
+    "queryParams": [],
+    "auth": null,
+    "events": null,
+    "folder": "4aeb9c56-1ad5-4de8-9ed6-70716fa90437",
+    "protocolProfileBehavior": {
+      "disableBodyPruning": true
+    },
+    "currentHelper": null,
+    "helperAttributes": null,
+    "collectionId": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+    "rawModeData": "",
+    "pathVariables": {}
+  },
+  {
+    "id": "56087fc4-a7aa-4640-a6fe-cb75993bbd10",
+    "name": "localhost:3000/api/management",
+    "url": "localhost:3000/api/management",
+    "description": "",
+    "data": [],
+    "dataOptions": {
+      "raw": {
+        "language": "json"
+      }
+    },
+    "dataMode": "raw",
+    "headerData": null,
+    "method": "GET",
+    "pathVariableData": [],
+    "queryParams": [],
+    "auth": null,
+    "events": null,
+    "folder": "4aeb9c56-1ad5-4de8-9ed6-70716fa90437",
+    "protocolProfileBehavior": {
+      "disableBodyPruning": true
+    },
+    "currentHelper": null,
+    "helperAttributes": null,
+    "collectionId": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+    "rawModeData": "{\r\n    \"student_id\": 1,\r\n    \"project_id\": 1\r\n}",
+    "pathVariables": {}
+  },
+  {
+    "id": "5ed64ab7-bc9d-4024-bec3-b773c9a25492",
+    "name": "Update",
+    "url": "localhost:3000/api/student/1",
+    "description": null,
+    "data": [],
+    "dataOptions": {
+      "raw": {
+        "language": "json"
+      }
+    },
+    "dataMode": "raw",
+    "headerData": [],
+    "method": "PUT",
+    "pathVariableData": [],
+    "queryParams": [],
+    "auth": null,
+    "events": null,
+    "folder": "88c3d9b2-1962-4bd4-bdc7-30aa8dd8840c",
+    "currentHelper": null,
+    "helperAttributes": null,
+    "collectionId": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+    "rawModeData": "{\n\t\"first_name\": \"Zuzu\",\n    \"last_name\": \"Petaz\", \n    \"email\": \"zuzu.petaz@mail.com\"\n}",
+    "headers": "",
+    "pathVariables": {}
+  },
+  {
+    "id": "766a01af-cccd-49db-9395-4518975a4df9",
+    "name": "localhost:3000/api/project",
+    "url": "localhost:3000/api/project/1",
+    "description": "",
+    "data": [],
+    "dataOptions": {
+      "raw": {
+        "language": "json"
+      }
+    },
+    "dataMode": "raw",
+    "headerData": null,
+    "method": "PUT",
+    "pathVariableData": [],
+    "queryParams": [],
+    "auth": null,
+    "events": null,
+    "folder": "e979a043-869a-4f9b-b9ad-0fa00ed592d0",
+    "currentHelper": null,
+    "helperAttributes": null,
+    "collectionId": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+    "rawModeData": "{\n\t\"name\":\"MyProjectChanged\",\n\t\"desc\":\"my awsome project description changed\"\n}",
+    "pathVariables": {}
+  },
+  {
+    "id": "850056db-d37d-46ba-a5ed-20cd024a8f05",
+    "name": "localhost:3000/api/project",
+    "url": "localhost:3000/api/project",
+    "description": "",
+    "data": [],
+    "dataOptions": {
+      "raw": {
+        "language": "json"
+      }
+    },
+    "dataMode": "raw",
+    "headerData": null,
+    "method": "GET",
+    "pathVariableData": [],
+    "queryParams": [],
+    "auth": null,
+    "events": null,
+    "folder": "e979a043-869a-4f9b-b9ad-0fa00ed592d0",
+    "protocolProfileBehavior": {
+      "disableBodyPruning": true
+    },
+    "currentHelper": null,
+    "helperAttributes": null,
+    "collectionId": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+    "rawModeData": "{\n\t\"name\":\"MyOtherProject\",\n\t\"desc\":\"my other awsome project description\"\n}",
+    "pathVariables": {}
+  },
+  {
+    "id": "935a318e-f3f7-4010-b77f-6013f52d9b49",
+    "name": "List",
+    "url": "localhost:3000/api/student",
+    "description": null,
+    "data": null,
+    "dataOptions": null,
+    "dataMode": null,
+    "headerData": [],
+    "method": "GET",
+    "pathVariableData": [],
+    "queryParams": [],
+    "auth": null,
+    "events": null,
+    "folder": "88c3d9b2-1962-4bd4-bdc7-30aa8dd8840c",
+    "responses": [
+      {
+        "id": "b393a901-ccfa-4259-88e5-f6ab70587183",
+        "name": "List",
+        "status": "OK",
+        "mime": "",
+        "language": "json",
+        "text": "{\n    \"students\": [\n        {\n            \"id\": \"1\",\n            \"first_name\": \"Ford\",\n            \"last_name\": \"Feacsrxflines\",\n            \"email\": \"foscsxrd@mail.com\",\n            \"createdAt\": \"Wed May 27 2020 21:12:16 GMT+0200 (Central European Summer Time)\",\n            \"updatedAt\": \"Wed May 27 2020 21:12:16 GMT+0200 (Central European Summer Time)\"\n        },\n        {\n            \"id\": \"9\",\n            \"first_name\": \"Ford\",\n            \"last_name\": \"Feacssrxflines\",\n            \"email\": \"fosscsxrd@mail.com\",\n            \"createdAt\": \"Wed May 27 2020 22:03:21 GMT+0200 (Central European Summer Time)\",\n            \"updatedAt\": \"Wed May 27 2020 22:03:21 GMT+0200 (Central European Summer Time)\"\n        },\n        {\n            \"id\": \"12\",\n            \"first_name\": \"Ford\",\n            \"last_name\": \"Feacssrxsflines\",\n            \"email\": \"\",\n            \"createdAt\": \"Wed May 27 2020 22:03:52 GMT+0200 (Central European Summer Time)\",\n            \"updatedAt\": \"Wed May 27 2020 22:03:52 GMT+0200 (Central European Summer Time)\"\n        },\n        {\n            \"id\": \"17\",\n            \"first_name\": \"Ford\",\n            \"last_name\": \"Fairlane\",\n            \"email\": \"ford.fairlane@mail.com\",\n            \"createdAt\": \"Wed May 27 2020 22:07:25 GMT+0200 (Central European Summer Time)\",\n            \"updatedAt\": \"Wed May 27 2020 22:07:25 GMT+0200 (Central European Summer Time)\"\n        }\n    ]\n}",
+        "responseCode": {
+          "code": 200,
+          "name": "OK",
+          "detail": ""
+        },
+        "requestObject": {
+          "id": "5b16a0f4-72e8-4491-92e5-589bbea82266",
+          "method": "GET",
+          "headers": "",
+          "url": "localhost:3000/api/student",
+          "pathVariableData": [],
+          "queryParams": [],
+          "headerData": [],
+          "dataMode": null,
+          "data": null
+        },
+        "headers": [
+          {
+            "key": "X-Powered-By",
+            "value": "Express"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json; charset=utf-8"
+          },
+          {
+            "key": "Content-Length",
+            "value": "983"
+          },
+          {
+            "key": "ETag",
+            "value": "W/\"3d7-ibu/TzfjDCkj6ll9MdWZ+wnNye0\""
+          },
+          {
+            "key": "Date",
+            "value": "Wed, 27 May 2020 20:10:41 GMT"
+          },
+          {
+            "key": "Connection",
+            "value": "keep-alive"
+          }
+        ],
+        "cookies": [],
+        "request": "935a318e-f3f7-4010-b77f-6013f52d9b49",
+        "collection": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16"
+      }
+    ],
+    "currentHelper": null,
+    "helperAttributes": null,
+    "collectionId": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+    "headers": "",
+    "pathVariables": {}
+  },
+  {
+    "id": "97205821-fe27-4afa-9579-5e00e7ec596a",
+    "name": "localhost:3000/api/management",
+    "url": "localhost:3000/api/management",
+    "description": "",
+    "data": [],
+    "dataOptions": {
+      "raw": {
+        "language": "json"
+      }
+    },
+    "dataMode": "raw",
+    "headerData": null,
+    "method": "POST",
+    "pathVariableData": [],
+    "queryParams": [],
+    "auth": null,
+    "events": null,
+    "folder": "4aeb9c56-1ad5-4de8-9ed6-70716fa90437",
+    "currentHelper": null,
+    "helperAttributes": null,
+    "collectionId": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+    "rawModeData": "{\r\n    \"student_id\": 1,\r\n    \"project_id\": 2\r\n}",
+    "pathVariables": {}
+  },
+  {
+    "id": "9cf2fc54-8091-45ec-8ab4-5c9767a5fa90",
+    "name": "localhost:3000/api/project",
+    "url": "localhost:3000/api/project/2",
+    "description": "",
+    "data": [],
+    "dataOptions": {
+      "raw": {
+        "language": "json"
+      }
+    },
+    "dataMode": "raw",
+    "headerData": null,
+    "method": "DELETE",
+    "pathVariableData": [],
+    "queryParams": [],
+    "auth": null,
+    "events": null,
+    "folder": "e979a043-869a-4f9b-b9ad-0fa00ed592d0",
+    "currentHelper": null,
+    "helperAttributes": null,
+    "collectionId": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+    "rawModeData": "{\n\t\"name\":\"MyProjectChanged\",\n\t\"desc\":\"my awsome project description changed\"\n}",
+    "pathVariables": {}
+  },
+  {
+    "id": "b1484c7b-3bae-402e-a75b-12b4721deacf",
+    "name": "localhost:3000/api/management",
+    "url": "localhost:3000/api/management/student/1",
+    "description": "",
+    "data": [],
+    "dataOptions": {
+      "raw": {
+        "language": "json"
+      }
+    },
+    "dataMode": "raw",
+    "headerData": null,
+    "method": "GET",
+    "pathVariableData": [],
+    "queryParams": [],
+    "auth": null,
+    "events": null,
+    "folder": "4aeb9c56-1ad5-4de8-9ed6-70716fa90437",
+    "protocolProfileBehavior": {
+      "disableBodyPruning": true
+    },
+    "currentHelper": null,
+    "helperAttributes": null,
+    "collectionId": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+    "rawModeData": "",
+    "pathVariables": {}
+  },
+  {
+    "id": "bb1f6498-5a47-4cc4-8881-47feb149d5cf",
+    "name": "localhost:3000/api/management",
+    "url": "localhost:3000/api/management/1",
+    "description": "",
+    "data": [],
+    "dataOptions": {
+      "raw": {
+        "language": "json"
+      }
+    },
+    "dataMode": "raw",
+    "headerData": null,
+    "method": "DELETE",
+    "pathVariableData": [],
+    "queryParams": [],
+    "auth": null,
+    "events": null,
+    "folder": "4aeb9c56-1ad5-4de8-9ed6-70716fa90437",
+    "currentHelper": null,
+    "helperAttributes": null,
+    "collectionId": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+    "rawModeData": "",
+    "pathVariables": {}
+  },
+  {
+    "id": "c5afd90b-ce5e-4c4c-9566-44a0579eeb5f",
+    "name": "localhost:3000/api/project",
+    "url": "localhost:3000/api/project",
+    "description": "",
+    "data": [],
+    "dataOptions": {
+      "raw": {
+        "language": "json"
+      }
+    },
+    "dataMode": "raw",
+    "headerData": null,
+    "method": "POST",
+    "pathVariableData": [],
+    "queryParams": [],
+    "auth": null,
+    "events": null,
+    "folder": "e979a043-869a-4f9b-b9ad-0fa00ed592d0",
+    "currentHelper": null,
+    "helperAttributes": null,
+    "collectionId": "ae907087-c61d-4a27-a6f3-2c9c2d3d7a16",
+    "rawModeData": "{\n\t\"name\":\"MyOtherProject\",\n\t\"desc\":\"my other awsome project description\"\n}",
+    "pathVariables": {}
+  }
+]
+}
