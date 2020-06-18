@@ -4,7 +4,7 @@ import {
   Switch,
   Route,
   Link
-} from "react-router-dom"
+} from 'react-router-dom'
 import { Layout, Menu } from 'antd'
 import {
   UserOutlined,
@@ -12,7 +12,7 @@ import {
   ContactsOutlined,
 } from '@ant-design/icons'
 import logo from '../images/logo/automizy-color-logo-full.svg'
-import "./Layout.css"
+import './Layout.css'
 import Student from '../page/student/Student'
 import Project from '../page/project/Project'
 import Management from '../page/management/Management'
@@ -37,53 +37,53 @@ const App = () => {
   }
   return (
     <Router>
-      <Layout className="layout">
+      <Layout className='layout'>
         <Layout.Sider
           trigger={null}
           collapsible
           collapsed={collapsed}
-          className={"sider"}
+          className={'sider'}
         >
           <img
-            className={collapsed ? "logo-hide" : "logo"}
+            className={collapsed ? 'logo-hide' : 'logo'}
             src={logo}
-            alt={""} />
+            alt={''} />
           <Menu
-            theme="dark"
-            mode="inline"
+            theme='dark'
+            mode='inline'
             selectedKeys={[activeMenu]}
             onClick={e => handleOnClickMenu(e)}>
-            <Menu.Item key="student" icon={<UserOutlined />}>
-              <Link to="/student">Student</Link>
+            <Menu.Item key='student' icon={<UserOutlined />}>
+              <Link to='/student'>Student</Link>
             </Menu.Item>
-            <Menu.Item key="project" icon={<BookOutlined />}>
-              <Link to="/project">Project</Link>
+            <Menu.Item key='project' icon={<BookOutlined />}>
+              <Link to='/project'>Project</Link>
             </Menu.Item>
-            <Menu.Item key="management" icon={<ContactsOutlined />}>
-              <Link to="/management">Management</Link>
+            <Menu.Item key='management' icon={<ContactsOutlined />}>
+              <Link to='/management'>Management</Link>
             </Menu.Item>
           </Menu>
         </Layout.Sider>
         <Switch>
-          <Route exact path="/">
+          <Route exact path='/'>
             <Student
               list={list}
               setList={setList}
             />
           </Route>
-          <Route path="/student">
+          <Route path='/student'>
             <Student
               list={list}
               setList={setList}
             />
           </Route>
-          <Route path="/project">
+          <Route path='/project'>
             <Project
               list={list}
               setList={setList}
             />
           </Route>
-          <Route path="/management">
+          <Route path='/management'>
             <Management
               list={list}
               setList={setList}

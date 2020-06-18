@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { Button, Modal, Form } from 'antd'
-import "../../../layout/Layout.css"
+import '../../../layout/Layout.css'
 import AddProjectForm from './AddProjectForm'
 
 const AddProjectModal = ({ visible, onClickCancel, onDone }) => {
@@ -39,7 +39,7 @@ const AddProjectModal = ({ visible, onClickCancel, onDone }) => {
     form.setFields([
       {
         name: Object.keys(name)[0],
-        errors: ["Alredy exists"]
+        errors: ['Alredy exists']
       }
     ])
   }
