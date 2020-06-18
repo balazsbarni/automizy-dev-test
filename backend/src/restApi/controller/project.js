@@ -5,7 +5,6 @@ import config from '../../config/service'
 const protoLoader = require("@grpc/proto-loader")
 
 const PROTO_PATH = path.join(__dirname, '../../proto/project.proto')
-
 const SERVICE_HOST = process.env.PROJECT_HOST || config.project.host
 
 exports.validationRules = (method) => {
@@ -40,7 +39,7 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 })
 
 const projectProto = grpc.loadPackageDefinition(packageDefinition).project
-const client = new projectProto.ProjectService(SERVICE_HOST + ':'+ config.project.port, grpc.credentials.createInsecure())
+const client = new projectProto.ProjectService(SERVICE_HOST +':'+ config.project.port, grpc.credentials.createInsecure())
 
 const projectList = (options) => {
     return new Promise((resolve, reject) => {
@@ -54,7 +53,7 @@ const projectList = (options) => {
 exports.list = async (req, res, next) => {
     try {
         const result = await projectList()
-        const formatted = result.projects.map(project => ({
+        const formattedProjects = result.projects.map(project => ({
             id: project.id,
             name: project.name,
             desc: project.description,
@@ -62,7 +61,7 @@ exports.list = async (req, res, next) => {
             createdAt: project.createdAt
         })
     )
-        res.status(200).json({projects: formatted})
+        res.status(200).json({projects: formattedProjects})
     } catch(e) {
         res.json(e)
     }
