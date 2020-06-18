@@ -32,7 +32,6 @@ const List = async (call, callback) => {
 
 const Create = async (call, callback) => {
     const project = call.request
-
     try {
         const result = await projectModel.create(project)
         callback(null, result)
@@ -101,7 +100,6 @@ const Update = async (call, callback) => {
     }
 }
 
-
 const Delete = async (call, callback) => {
     const id = call.request.id
     try {
@@ -121,7 +119,6 @@ const Delete = async (call, callback) => {
         })
     }
 }
-
 
 const dbErrorCollector=({errors}) => {
     const metadata = new grpc.Metadata()

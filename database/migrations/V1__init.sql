@@ -9,6 +9,15 @@ CREATE TABLE IF NOT EXISTS student (
 CREATE TABLE IF NOT EXISTS project (
   id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(50) NOT NULL,
-  description VARCHAR(100) DEFAULT NULL,
+  description VARCHAR(200) DEFAULT NULL,
   PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS management (
+  id INT NOT NULL AUTO_INCREMENT,
+  student_id INT NOT NULL,
+  project_id INT NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (student_id) REFERENCES student(id),
+  FOREIGN KEY (project_id) REFERENCES project(id)
 );

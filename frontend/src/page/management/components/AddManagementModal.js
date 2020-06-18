@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { Button, Modal, Form } from 'antd'
-import "../../../layout/Layout.css"
+import '../../../layout/Layout.css'
 import AddManagementForm from './AddManagementForm'
 
 const AddManagementModal = ({ visible, onClickCancel, onDone, list }) => {

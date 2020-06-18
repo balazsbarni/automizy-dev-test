@@ -63,7 +63,7 @@ const ListProject = ({ reloadListTrigger, list, setList }) => {
                 {list.projectData.map(project =>
                   <Panel header={project.name} key={project.id}>
                     <p>{project.desc}</p>
-                    <Button type="primary" onClick={() => onClickDeleteProject(project)}>Delete</Button>
+                    <Button type='primary' onClick={() => onClickDeleteProject(project)}>Delete</Button>
                   </Panel>
                 )}
               </Collapse>
